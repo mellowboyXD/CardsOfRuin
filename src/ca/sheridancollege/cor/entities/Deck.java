@@ -1,35 +1,29 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
- */
-package ca.sheridancollege.project;
+package ca.sheridancollege.cor.entities;
 
+import ca.sheridancollege.cor.entities.Card;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * A concrete class that represents any grouping of cards for a Game. HINT, you might want to subclass this more than
- * once. The group of cards has a maximum size attribute which is flexible for reuse.
+ * A concrete class that represents any deck of cards.
  *
  * @author dancye
  * @author Paul Bonenfant
  * @author Prem Parashar
+ * @author mellowboy
  */
-public class GroupOfCards {
+public class Deck {
 
     //The group of cards, stored in an ArrayList
     private ArrayList<Card> cards;
-    private int size;//the size of the grouping
+    private int size;
 
-    public GroupOfCards(int size) {
+    public Deck(int size) {
         this.size = size;
     }
 
     /**
-     * A method that will get the group of cards as an ArrayList
-     *
-     * @return the group of cards.
+     * @return the deck of cards.
      */
     public ArrayList<Card> getCards() {
         return cards;
@@ -53,4 +47,4 @@ public class GroupOfCards {
         this.size = size;
     }
 
-}//end class
+}
