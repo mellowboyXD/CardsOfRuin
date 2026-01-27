@@ -8,11 +8,13 @@ package ca.sheridancollege.cor.model;
  * @author dancye
  * @author mellowboyxd
  */
-public abstract class Card {
+public class Card {
     /**
      * @return a String representation of a card.
      */
     @Override
-    public abstract String toString();
+    public String toString() {
+	    return "Base Card";
+    };
 
 }

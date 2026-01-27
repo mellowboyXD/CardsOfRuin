@@ -1,7 +1,8 @@
-package ca.sheridancollege.cor.model.states;
+package ca.sheridancollege.cor.states;
 
 /**
- *
+ * Manages the current state.
+ * 
  * @author mellowboy
  */
 public class GameContext {
@@ -15,10 +16,16 @@ public class GameContext {
 		currentState.enter();
 	}
 
+	/**
+	 * @return the current state 
+	 */
 	public GameState getState() {
 		return currentState;
 	}
 
+	/** 
+	 * Updates the current state if it is not null and proceeds to next state
+	 */
 	public void update() {
 		if (currentState != null) {
 			currentState.update();

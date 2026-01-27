@@ -1,4 +1,4 @@
-package ca.sheridancollege.cor.model.states;
+package ca.sheridancollege.cor.states;
 
 /**
  *

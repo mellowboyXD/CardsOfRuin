@@ -1,5 +1,6 @@
-package ca.sheridancollege.cor.model.states;
+package ca.sheridancollege.cor.states;
 
+import ca.sheridancollege.cor.model.Card;
 import ca.sheridancollege.cor.model.GameData;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -15,18 +16,19 @@ import java.util.Scanner;
  */
 public class MenuState implements GameState{
 
-	private GameData data;
-	private GameContext context;
-	private Scanner scanner;
+	private final GameData data;
+	private final Scanner scanner;
+	private boolean startGame;
 
 	public MenuState(GameData data) {
 		this.data = data;
 		this.scanner = data.getScanner();
+		startGame = false;
 	}
 
 	@Override
 	public void enter() {
-		System.out.println("==== Cards Of Ruin ====");
+		System.out.println("==== CARDS OF RUIN ====");
 		System.out.println("1. Play/Continue");
 		System.out.println("2. View Deck");
 		System.out.println("3. Exit");
@@ -40,12 +42,13 @@ public class MenuState implements GameState{
 			try {
 				choice = scanner.nextInt();
 				switch (choice) {
-					case 1 -> throw new UnsupportedOperationException("Not Implemented Yet! Should Move on to next state");
-					case 2 -> throw new UnsupportedOperationException("Not Implemented Yet! Should move to display deck");
-					case 3 -> throw new UnsupportedOperationException("Not Implemented Yet!");
-					default -> throw new IllegalStateException("Invalid State");
+					case 1 -> startGame = true;
+					case 2 -> showDeck();
+					case 3 -> System.exit(0);
+					default -> throw new IllegalStateException("Invalid Option");
 				}
 			} catch (InputMismatchException ex) {
+				System.out.println("Invalid input. Enter integers only.");
 				scanner.next();
 				choice = -1;
 			} catch (IllegalStateException ex) {
@@ -54,16 +57,30 @@ public class MenuState implements GameState{
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-		} while (choice != -1);
+		} while (choice == -1);
 	}
 
 	@Override
 	public void exit() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		System.out.println("\n==== SETUP PHASE ====");
 	}
 
 	@Override
 	public GameState nextState() {
-		throw new UnsupportedOperationException("Not supported yet."); 
+		if (startGame)
+			return new SetupState(data);
+
+		// stay in current state
+		return null;
+	}
+
+	private void showDeck() {
+		System.out.println("\n==== Deck ====");
+		var deck = data.getDeck();
+		if (deck != null) {
+			for (Card c : deck.getCards()) {
+				System.out.println(c);
+			}
+		}
 	}
 }
