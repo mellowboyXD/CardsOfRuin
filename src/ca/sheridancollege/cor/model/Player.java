@@ -1,4 +1,4 @@
-package ca.sheridancollege.cor.entities;
+package ca.sheridancollege.cor.model;
 
 /**
  * A class that models each Player in the game. Players have an identifier, which should be unique.
@@ -6,40 +6,34 @@ package ca.sheridancollege.cor.entities;
  * @author dancye
  * @author Paul Bonenfant
  * @author Prem Parashar
+ * @author mellowboy
  */
-public abstract class Player {
+public class Player {
 
-    private String name; //the unique name for this player
+    private String id; //the unique id for this player
 
     /**
      * A constructor that allows you to set the player's unique ID
      *
-     * @param name the unique ID to assign to this player.
+     * @param id the unique ID to assign to this player.
      */
-    public Player(String name) {
-        this.name = name;
+    public Player(String id) {
+        this.id = id;
     }
 
     /**
-     * @return the player name
+     * @return the player id
      */
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
     /**
      * Ensure that the playerID is unique
      *
-     * @param name the player name to set
+     * @param id the player id to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
-
-    /**
-     * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
-     * with logic to play your game.
-     */
-    public abstract void play();
-
 }

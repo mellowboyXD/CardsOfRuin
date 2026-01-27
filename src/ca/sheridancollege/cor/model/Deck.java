@@ -1,6 +1,6 @@
-package ca.sheridancollege.cor.entities;
+package ca.sheridancollege.cor.model;
 
-import ca.sheridancollege.cor.entities.Card;
+import ca.sheridancollege.cor.model.Card;
 import java.util.ArrayList;
 import java.util.Collections;
 

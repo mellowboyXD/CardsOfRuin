@@ -1,4 +1,4 @@
-package ca.sheridancollege.cor.entities;
+package ca.sheridancollege.cor.model;
 
 /**
  * A class to be used as the base Card class for the project. Must be general enough to be instantiated for any Card
