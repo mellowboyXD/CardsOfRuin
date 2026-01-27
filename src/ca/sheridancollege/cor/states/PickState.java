@@ -8,12 +8,12 @@ import java.util.Scanner;
  * Player picks a card to apply.
  * @author mellowboy
  */
-public class PickPhase implements GameState {
+public class PickState implements GameState {
 
 	private GameData data;
 	private Scanner scanner;
 
-	public PickPhase(GameData data) {
+	public PickState(GameData data) {
 		this.data = data;
 		this.scanner = data.getScanner();
 	}

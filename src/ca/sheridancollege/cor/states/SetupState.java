@@ -66,7 +66,7 @@ public class SetupState implements GameState{
 	@Override
 	public GameState nextState() {
 		if (ready)
-			return new PickPhase(data);
+			return new PickState(data);
 
 		// stay in this state
 		return null;
