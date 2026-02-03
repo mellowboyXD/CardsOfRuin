@@ -28,7 +28,7 @@ public class SetupState implements GameState{
 		if (hand == null) {
 			hand = new Hand(GameData.HAND_SIZE);
 			hand.setCards(new ArrayList<Card>());
-			for(int i = 0; i < hand.getCards().size(); i++) {
+			for(int i = 0; i < hand.getSize(); i++) {
 				hand.getCards().add(data.getDeck().draw());
 			}
 			data.setHand(hand);
@@ -51,6 +51,7 @@ public class SetupState implements GameState{
 		System.out.println("==== PREPARE FOR BATTLE ====");
 		System.out.println("Monster #" + (data.getMonstersDefeated() + 1) + " " + currentMonster);
 		System.out.println("Your stats: " + data.getPlayer());
+		System.out.println("Your hand: " + data.getHand());
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class SetupState implements GameState{
 	@Override
 	public GameState nextState() {
 		if (ready)
-			return new PickState(data);
+			return new DrawCardState(data);
 
 		// stay in this state
 		return null;

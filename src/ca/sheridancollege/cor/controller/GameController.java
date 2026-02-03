@@ -11,7 +11,7 @@ import ca.sheridancollege.cor.states.MenuState;
  * @author mellowboy
  */
 public class GameController {
-	private String title;
+	private final String title;
 	private GameData data;
 	private GameContext context;
 

@@ -10,6 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		GameController gameController = new GameController("Cards Of Ruins");
 
+		// Run the game
 		gameController.run();
 	}
 }

@@ -70,4 +70,12 @@ public class Deck {
 	    return rand.nextInt(cards.size());
     }
 
+    @Override
+    public String toString() {
+	    StringBuilder ret = new StringBuilder();
+	    for (Card card : cards) {
+		    ret.append(card).append("\t");
+	    }
+	    return ret.toString();
+    }
 }
