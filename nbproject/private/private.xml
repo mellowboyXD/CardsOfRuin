@@ -3,7 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/project/Card.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/states/MenuState.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/states/SetupState.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/states/GameContext.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/model/Card.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/states/DrawCardState.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/Main.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/model/Deck.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/model/Hand.java</file>
+            <file>file:/home/mellowboy/Documents/school/software-design/code/CardsOfRuin/src/ca/sheridancollege/cor/model/GameData.java</file>
         </group>
     </open-files>
 </project-private>
