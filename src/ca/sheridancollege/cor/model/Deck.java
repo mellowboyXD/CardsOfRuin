@@ -13,24 +13,28 @@ import java.util.Random;
  */
 public class Deck {
 
-    //The group of cards, stored in an ArrayList
+    // The group of cards, stored in an ArrayList
     private List<Card> cards;
     private int size;
     private Random rand;
 
     public Deck(int size) {
         this.size = size;
-	rand = new Random();
-	cards = new ArrayList<Card>();
+        rand = new Random();
+        cards = new ArrayList<Card>();
     }
 
     /**
-     * Initialize deck.
+     * Initialize deck that contains unique cards.
      */
     public final void setup() {
-	    for (int i = 0; i < size; i++) {
-		    cards.add(new Card());
-	    }
+        for (int i = 0; i < size; i++) {
+            var newCard = new Card();
+            /* make sure the cards are unique. */
+            while (cards.contains(newCard))
+                newCard = new Card();
+            cards.add(newCard);
+        }
     }
 
     /**
@@ -41,7 +45,7 @@ public class Deck {
     }
 
     public void setCards(List<Card> cards) {
-	    this.cards = cards;
+        this.cards = cards;
     }
 
     public void shuffle() {
@@ -49,7 +53,7 @@ public class Deck {
     }
 
     public Card draw() {
-	    return cards.get(getRandomIndex());
+        return cards.get(getRandomIndex());
     }
 
     /**
@@ -67,15 +71,15 @@ public class Deck {
     }
 
     public int getRandomIndex() {
-	    return rand.nextInt(cards.size());
+        return rand.nextInt(cards.size());
     }
 
     @Override
     public String toString() {
-	    StringBuilder ret = new StringBuilder();
-	    for (Card card : cards) {
-		    ret.append(card).append("\t");
-	    }
-	    return ret.toString();
+        StringBuilder ret = new StringBuilder();
+        for (Card card : cards) {
+            ret.append(card).append("\t");
+        }
+        return ret.toString();
     }
 }
