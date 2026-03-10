@@ -1,9 +1,10 @@
 package ca.sheridancollege.cor.states;
 
-import ca.sheridancollege.cor.model.Card;
-import ca.sheridancollege.cor.model.GameData;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import ca.sheridancollege.cor.model.cards.Card;
+import ca.sheridancollege.cor.model.GameData;
 
 /**
  * This is where the menu is displayed allowing players to continue playing or
