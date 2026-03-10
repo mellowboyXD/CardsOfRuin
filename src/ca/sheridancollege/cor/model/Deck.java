@@ -1,6 +1,6 @@
 package ca.sheridancollege.cor.model;
 
-import ca.sheridancollege.cor.model.Card;
+import ca.sheridancollege.cor.model.cards.Card;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

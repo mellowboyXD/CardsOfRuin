@@ -1,6 +1,6 @@
 package ca.sheridancollege.cor.states;
 
-import ca.sheridancollege.cor.model.Card;
+import ca.sheridancollege.cor.model.cards.Card;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Hand;
 
