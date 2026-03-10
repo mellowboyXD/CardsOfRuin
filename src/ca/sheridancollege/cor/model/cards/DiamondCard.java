@@ -3,6 +3,11 @@ package ca.sheridancollege.cor.model.cards;
 import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.model.Player;
 
+/**
+ * Diamond type card.
+ *
+ * @author mellowboy
+ */
 public class DiamondCard extends Card {
     public DiamondCard(int value) {
         this.setSuit(Suit.DIAMONDS);

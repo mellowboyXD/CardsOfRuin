@@ -3,6 +3,11 @@ package ca.sheridancollege.cor.model.cards;
 import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.model.Player;
 
+/**
+ * Club type card.
+ *
+ * @author mellowboy
+ */
 public class ClubCard extends Card {
 
     public ClubCard(int value) {

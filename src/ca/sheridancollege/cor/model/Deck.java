@@ -15,15 +15,15 @@ import java.util.Random;
  */
 public class Deck {
 
-    // The group of cards, stored in an ArrayList
+    // The group of cards, stored in a List
     private List<Card> cards;
-    private int size;
+    private final int size;
     private final Random rand;
 
     public Deck(int size) {
         this.size = size;
         rand = new Random();
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
     }
 
     /**
@@ -32,11 +32,13 @@ public class Deck {
     public final void setup() {
         for (int i = 0; i < size; i++) {
             var newCard = CardGenerator.generateCard();
+
             /* make sure the cards are unique. */
             while (cards.contains(newCard))
                 newCard = CardGenerator.generateCard();
             cards.add(newCard);
         }
+        shuffle();
     }
 
     /**
@@ -63,13 +65,6 @@ public class Deck {
      */
     public int getSize() {
         return size;
-    }
-
-    /**
-     * @param size the max size for the deck of cards
-     */
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public int getRandomIndex() {

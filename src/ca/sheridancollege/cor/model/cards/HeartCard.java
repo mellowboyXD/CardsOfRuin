@@ -4,7 +4,10 @@ import ca.sheridancollege.cor.model.Player;
 import ca.sheridancollege.cor.model.Monster;
 
 /**
- * This class is a card of type heart. It implements apply. */
+ * This class is a card of type heart. It implements apply.
+ *
+ * @author mellowboy
+ * */
 public class HeartCard extends Card {
 
     public HeartCard(int value) {

@@ -1,6 +1,5 @@
 package ca.sheridancollege.cor.states;
 
-import ca.sheridancollege.cor.model.cards.Card;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Hand;
 
@@ -14,10 +13,10 @@ import java.util.Scanner;
  */
 public class DrawCardState implements GameState {
 
-    private GameData data;
-    private Scanner scanner;
+    private final GameData data;
+    private final Scanner scanner;
     private boolean ready = false;
-    private Hand hand;
+    private final Hand hand;
 
     public DrawCardState(GameData data) {
         this.data = data;
@@ -36,7 +35,7 @@ public class DrawCardState implements GameState {
 
     @Override
     public void update() {
-        int choice = -1;
+        int choice;
         do {
             try {
                 System.out.print("> ");
@@ -55,9 +54,8 @@ public class DrawCardState implements GameState {
 
         var selectedCard = hand.getCards().get(choice);
         System.out.println("Selected card: " + selectedCard);
-        // TODO: Apply card to player stats
-        // TODO: Set up cards classes
         // TODO: Implement different card effects
+        selectedCard.apply(data.getPlayer(), data.getMonster());
         ready = true;
     }
 

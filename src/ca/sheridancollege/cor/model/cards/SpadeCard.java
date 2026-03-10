@@ -5,6 +5,8 @@ import ca.sheridancollege.cor.model.Player;
 
 /**
  * This is the class for the type Spades.
+ *
+ * @author mellowboy
  */
 public class SpadeCard extends Card {
 
