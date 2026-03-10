@@ -1,6 +1,8 @@
 package ca.sheridancollege.cor.model;
 
 import ca.sheridancollege.cor.model.cards.Card;
+import ca.sheridancollege.cor.model.cards.CardGenerator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,7 @@ public class Deck {
     // The group of cards, stored in an ArrayList
     private List<Card> cards;
     private int size;
-    private Random rand;
+    private final Random rand;
 
     public Deck(int size) {
         this.size = size;
@@ -29,10 +31,10 @@ public class Deck {
      */
     public final void setup() {
         for (int i = 0; i < size; i++) {
-            var newCard = new Card();
+            var newCard = CardGenerator.generateCard();
             /* make sure the cards are unique. */
             while (cards.contains(newCard))
-                newCard = new Card();
+                newCard = CardGenerator.generateCard();
             cards.add(newCard);
         }
     }
