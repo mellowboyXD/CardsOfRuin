@@ -20,16 +20,6 @@ import java.util.Random;
  */
 public final class Card {
 
-    /**
-     * Enum representing the four standard card suits
-     */
-    public enum Suit {
-        HEARTS,
-        DIAMONDS,
-        CLUBS,
-        SPADES
-    }
-
     private static final Random random = new Random();
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 13;
