@@ -15,8 +15,20 @@ public class HeartCard extends Card {
         this.setValue(value);
     }
 
+    /**
+     * Increase player's health by card value. Notify if health is already at max value.
+     * @param player
+     * @param monster
+     */
     @Override
     public void apply(Player player, Monster monster) {
-        // TODO: To implement this method accordingly
+        var playerHealth = player.getHealth();
+        var newHealth = playerHealth + getValue();
+        if (newHealth <= player.getMaxHealth()) {
+            player.setHealth(newHealth);
+            System.out.println("Gained health points!");
+        } else {
+            System.out.println("Already at max health points!");
+        }
     }
 }

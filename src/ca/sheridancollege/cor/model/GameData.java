@@ -27,6 +27,7 @@ public class GameData {
 
 	public final void setup() {
 		player = new Player();
+		player.setup();
 		context = new GameContext();
 		scanner = new Scanner(System.in);
 		round = 1;
