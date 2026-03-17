@@ -6,8 +6,8 @@ package ca.sheridancollege.cor.model;
  * @author mellowboy
  */
 public abstract class Entity {
-    private final int MAX_HEALTH = 100;
-    private final int MAX_ATTACK = 500;
+    private final int MAX_HEALTH = 200;
+    private final int MAX_ATTACK = 150;
     private final int MAX_SHIELD = 300;
 
     private int health;
@@ -51,4 +51,9 @@ public abstract class Entity {
     }
 
     public abstract void setup();
+
+    @Override
+    public String toString() {
+            return "health: %d - attack: %d - shield: %d".formatted(getHealth(), getAttack(), getShield());
+    }
 }

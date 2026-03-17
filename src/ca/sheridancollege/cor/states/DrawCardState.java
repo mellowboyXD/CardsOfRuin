@@ -40,7 +40,7 @@ public class DrawCardState implements GameState {
             try {
                 System.out.print("> ");
                 choice = scanner.nextInt();
-                if (choice > hand.getSize())
+                if (choice > hand.getSize() || choice < 1)
                     throw new IllegalStateException("Invalid choice");
             } catch (InputMismatchException ex) {
                 System.out.println("Invalid input. Try again.");
@@ -52,10 +52,10 @@ public class DrawCardState implements GameState {
             }
         } while (choice == -1);
 
-        var selectedCard = hand.getCards().get(choice);
+        var selectedCard = hand.getCards().get(choice - 1);
         System.out.println("Selected card: " + selectedCard);
-        // TODO: Implement different card effects
         selectedCard.apply(data.getPlayer(), data.getMonster());
+        System.out.println("Player: " + data.getPlayer());
         ready = true;
     }
 
@@ -67,8 +67,7 @@ public class DrawCardState implements GameState {
     @Override
     public GameState nextState() {
         if (ready)
-            throw new UnsupportedOperationException(
-                    "Next state not implemented(Current: " + this.getClass().getName() + ")");
+            return new CombatState(data);
 
         // stay in current state
         return null;
