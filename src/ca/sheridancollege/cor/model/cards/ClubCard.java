@@ -15,8 +15,20 @@ public class ClubCard extends Card {
         this.setValue(value);
     }
 
+    /**
+     * Increase player's shield by card value. Notify if already at max shield.
+     * @param player
+     * @param monster
+     */
     @Override
     public void apply(Player player, Monster monster) {
-        // TODO:
+        var playerShield = player.getShield();
+        var newShield = playerShield + getValue();
+        if (newShield <= player.getMaxShield()) {
+            player.setShield(newShield);
+            System.out.println("Gained shield!");
+        } else {
+            System.out.println("Shield is already at max value!");
+        }
     }
 }

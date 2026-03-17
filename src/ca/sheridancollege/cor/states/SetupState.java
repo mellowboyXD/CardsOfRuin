@@ -27,7 +27,7 @@ public class SetupState implements GameState {
         var hand = data.getHand();
         if (hand == null) {
             hand = new Hand(GameData.HAND_SIZE);
-            hand.setCards(new ArrayList<Card>());
+            hand.setCards(new ArrayList<>());
             for (int i = 0; i < hand.getSize(); i++) {
                 hand.getCards().add(data.getDeck().draw());
             }
@@ -38,6 +38,7 @@ public class SetupState implements GameState {
         if (currentMonster == null) {
             // TODO: use builder design pattern to create monster
             currentMonster = new Monster();
+            currentMonster.setup();
             data.setMonster(currentMonster);
         } else {
             // decrease shield after each round

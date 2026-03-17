@@ -87,10 +87,7 @@ public class DrawCardState implements GameState {
             try {
                 System.out.print("> ");
                 choice = scanner.nextInt();
-                
-                // Validate that the chosen card exists in hand
-                // Note: choice is 1-indexed in display but 0-indexed in list
-                if (choice > hand.getSize() || choice < 1) {
+                if (choice > hand.getSize() || choice < 1)
                     throw new IllegalStateException("Invalid choice");
                 }
             } catch (InputMismatchException ex) {
@@ -105,15 +102,11 @@ public class DrawCardState implements GameState {
             }
         } while (choice == -1); // Continue until valid input received
 
-        // Note: Adjust for 1-indexed display vs 0-indexed list
         var selectedCard = hand.getCards().get(choice - 1);
         System.out.println("Selected card: " + selectedCard);
-        
-        // TODO: Apply card effects to player stats (health, attack, defense, etc.)
-        // TODO: Consider using Strategy pattern for different card types
-        // TODO: Handle card removal from hand after use if applicable
-        
-        ready = true; // Mark that a card has been successfully selected
+        selectedCard.apply(data.getPlayer(), data.getMonster());
+        System.out.println("Player: " + data.getPlayer());
+        ready = true;
     }
 
     /**
@@ -140,12 +133,8 @@ public class DrawCardState implements GameState {
      */
     @Override
     public GameState nextState() {
-        if (ready) {
-            // TODO: Replace with proper state transition to CombatState
-            throw new UnsupportedOperationException(
-                "Next state not implemented (Current: " + this.getClass().getName() + ")"
-            );
-        }
+        if (ready)
+            return new CombatState(data);
 
         // Stay in current state if no card has been selected yet
         return null;
