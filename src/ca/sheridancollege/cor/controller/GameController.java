@@ -12,8 +12,7 @@ import ca.sheridancollege.cor.states.MenuState;
  */
 public class GameController {
 	private final String title;
-	private GameData data;
-	private GameContext context;
+    private GameContext context;
 
 	public GameController(String title) {
 		this.title = title;
@@ -21,7 +20,7 @@ public class GameController {
 	}
 
 	public final void setup() {
-		data = new GameData();
+        GameData data = new GameData();
 		context = new GameContext();
 		context.setState(new MenuState(data));
 	}
@@ -31,7 +30,7 @@ public class GameController {
 	}
 
 	public void run() {
-		while(true) {
+		while (true) {
 			context.update();
 		}
 	}

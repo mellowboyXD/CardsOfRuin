@@ -15,15 +15,18 @@ public abstract class Entity {
     private int attack;
 
     public void setHealth(int health) {
-        if (health <= MAX_HEALTH) this.health = health;
+        if (health < 0) this.health = 0;
+        if (health >= 0 && health <= MAX_HEALTH) this.health = health;
     }
 
     public void setShield(int shield) {
-        if (shield <= MAX_SHIELD) this.shield = shield;
+        if (shield < 0) this.shield = 0;
+        if (shield >= 0 && shield <= MAX_SHIELD) this.shield = shield;
     }
 
     public void setAttack(int attack) {
-        if (attack <= MAX_ATTACK) this.attack = attack;
+        if (attack < 0) this.attack = 0;
+        if (attack >= 0 && attack <= MAX_ATTACK) this.attack = attack;
     }
 
     public int getHealth() {

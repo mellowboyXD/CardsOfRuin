@@ -13,25 +13,31 @@ import java.util.Scanner;
  * - View their current deck
  * - Exit the game
  * This state serves as the entry point and navigation hub for the game.
- * 
+ *
  * @author mellowboy
  * @see GameState
  * @see SetupState
  */
 public class MenuState implements GameState {
 
-    /** Shared game data containing player information and game state */
+    /**
+     * Shared game data containing player information and game state
+     */
     private final GameData data;
-    
-    /** Scanner instance for reading user input */
+
+    /**
+     * Scanner instance for reading user input
+     */
     private final Scanner scanner;
-    
-    /** Flag indicating whether to transition to the game setup phase */
+
+    /**
+     * Flag indicating whether to transition to the game setup phase
+     */
     private boolean startGame;
 
     /**
      * Constructs a new MenuState with the given game data.
-     * 
+     *
      * @param data The shared game data object containing player information
      *             and game configuration
      */
@@ -39,6 +45,9 @@ public class MenuState implements GameState {
         this.data = data;
         this.scanner = data.getScanner();
         this.startGame = false;
+        if (data.getPlayer().getHealth() <= 0) {
+            data.setup();
+        }
     }
 
     /**
@@ -64,7 +73,7 @@ public class MenuState implements GameState {
      */
     @Override
     public void update() {
-        int choice = -1;
+        int choice;
         do {
             System.out.print("> ");
             try {
@@ -94,9 +103,9 @@ public class MenuState implements GameState {
 
     /**
      * Determines the next state based on user selection.
-     * 
+     *
      * @return SetupState if player chose to start game,
-     *         null to remain in current state
+     * null to remain in current state
      */
     @Override
     public GameState nextState() {
@@ -120,6 +129,6 @@ public class MenuState implements GameState {
                 System.out.println(c);
             }
         }
-        
+
     }
 }

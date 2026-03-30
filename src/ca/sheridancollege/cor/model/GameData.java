@@ -12,7 +12,6 @@ import java.util.Scanner;
  * - Game progression tracking (rounds, monsters defeated)
  * - Input handling resources
  * - State management context
- * 
  * This class follows the principle of centralizing game state to facilitate
  * easy data sharing between different game states and components.
  * 
@@ -32,19 +31,19 @@ public class GameData {
     public static int HAND_SIZE = 3;
 
     /** The game state machine context that manages state transitions */
-    private GameContext context;
+    private final GameContext context;
     
     /** The player entity containing player-specific attributes and stats */
-    private Player player;
+    private final Player player;
     
     /** The current monster entity being fought, null if no active monster */
     private Monster monster;
     
     /** Scanner instance for handling user input throughout the game */
-    private Scanner scanner;
+    private final Scanner scanner;
     
     /** The player's complete collection of available cards */
-    private Deck deck;
+    private final Deck deck;
     
     /** The player's current hand of cards drawn from the deck */
     private Hand hand;
@@ -71,13 +70,11 @@ public class GameData {
      * Initializes or resets all game data to their starting values.
      * This method is marked final to prevent overriding and ensure
      * consistent initialization across all game instances.
-     * 
      * Creates fresh instances of:
      * - Player entity
      * - Game context for state management
      * - Scanner for input handling
      * - Deck with initial cards
-     * 
      * Resets tracking variables:
      * - Round counter to 1
      * - Monsters defeated to 0
@@ -152,7 +149,9 @@ public class GameData {
      * Called when a monster is successfully defeated in combat.
      */
     public void defeatMonster() {
+        monster = null;
         monstersDefeated++;
+        round++;
     }
 
     /**
@@ -204,7 +203,6 @@ public class GameData {
     /**
      * Closes the scanner to release system resources.
      * Should be called when the game is shutting down to prevent resource leaks.
-     * 
      * Note: After calling this method, the scanner cannot be used again.
      */
     public void closeScanner() {

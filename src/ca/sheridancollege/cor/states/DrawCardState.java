@@ -99,7 +99,7 @@ public class DrawCardState implements GameState {
             }
         } while (choice == -1); // Continue until valid input received
 
-        var selectedCard = hand.getCards().get(choice - 1);
+        var selectedCard = hand.draw(choice - 1);
         System.out.println("Selected card: " + selectedCard);
         selectedCard.apply(data.getPlayer(), data.getMonster());
         System.out.println("Player: " + data.getPlayer());

@@ -14,8 +14,10 @@ public class CombatState implements GameState{
     private final Scanner scanner;
     private boolean ready;
     private final int monsterIdx;
+    private final GameData gameData;
 
     public CombatState(GameData data) {
+        this.gameData = data;
         this.player = data.getPlayer();
         this.monster = data.getMonster();
         this.scanner = data.getScanner();
@@ -73,6 +75,8 @@ public class CombatState implements GameState{
 
     @Override
     public GameState nextState() {
+        if (ready)
+            return new RewardState(gameData);
         return null;
     }
 }

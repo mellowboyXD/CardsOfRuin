@@ -12,7 +12,20 @@ public class Hand extends Deck {
     }
 
     @Override
-    public Card draw() {
+    public Card drawRandom() {
         return super.getCards().remove(super.getRandomIndex());
+    }
+
+    public Card draw(int index) {
+        var cards = super.getCards();
+        if (index < 0 || index > cards.size() - 1) {
+            throw new IllegalArgumentException("Index invalid. Out of range");
+        }
+
+        this.setSize(this.getSize() - 1);
+        if (this.getSize() < 0) {
+            throw new IllegalStateException("Cannot remove. No cards");
+        }
+        return this.getCards().remove(index);
     }
 }

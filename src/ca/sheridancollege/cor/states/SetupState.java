@@ -2,7 +2,6 @@ package ca.sheridancollege.cor.states;
 
 import java.util.ArrayList;
 
-import ca.sheridancollege.cor.model.cards.Card;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Hand;
 import ca.sheridancollege.cor.model.Monster;
@@ -29,9 +28,17 @@ public class SetupState implements GameState {
             hand = new Hand(GameData.HAND_SIZE);
             hand.setCards(new ArrayList<>());
             for (int i = 0; i < hand.getSize(); i++) {
-                hand.getCards().add(data.getDeck().draw());
+                hand.getCards().add(data.getDeck().drawRandom());
             }
             data.setHand(hand);
+        }
+
+        if (hand.getSize() < GameData.HAND_SIZE) {
+            int oldSize = hand.getSize();
+            hand.setSize(GameData.HAND_SIZE);
+            for (int i = oldSize; i < hand.getSize(); i++) {
+                hand.getCards().add(data.getDeck().drawRandom());
+            }
         }
 
         var currentMonster = data.getMonster();
