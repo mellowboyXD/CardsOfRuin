@@ -25,6 +25,11 @@ public class GameController {
 		context = new GameContext();
 		context.setState(new MenuState(data));
 	}
+        //Get Method for context
+        public GameContext getContext()
+        {
+            return context;
+        }
 
 	public String getTitle() {
 		return title;
