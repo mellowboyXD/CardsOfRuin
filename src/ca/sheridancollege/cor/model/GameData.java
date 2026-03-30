@@ -60,6 +60,10 @@ public class GameData {
      * Calls {@link #setup()} to establish the initial game state.
      */
     public GameData() {
+        player = new Player();
+        context = new GameContext();
+        scanner = new Scanner(System.in);
+        deck = new Deck(DECK_SIZE);
         setup();
     }
 
@@ -81,12 +85,9 @@ public class GameData {
      * - Monster to null (will be created when combat begins)
      */
     public final void setup() {
-        player = new Player();
-        context = new GameContext();
-        scanner = new Scanner(System.in);
+        player.setup();
         round = 1;
         monstersDefeated = 0;
-        deck = new Deck(DECK_SIZE);
         deck.setup(); // Initialize deck with cards
         hand = null;  // Hand starts empty, will be drawn when game begins
         monster = null; // No monster initially
