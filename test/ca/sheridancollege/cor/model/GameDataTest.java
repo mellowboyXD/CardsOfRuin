@@ -78,7 +78,7 @@ public class GameDataTest {
         GameData instance = new GameData();
         instance.setHand(cards);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertSame(cards, instance.getHand());
     }
 
     /**
@@ -88,11 +88,10 @@ public class GameDataTest {
     public void testGetDeck() {
         System.out.println("getDeck");
         GameData instance = new GameData();
-        Deck expResult = null;
         Deck result = instance.getDeck();
-        assertEquals(expResult, result);
+        assertNotNull(result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(GameData.DECK_SIZE, result.getCards().size());
     }
 
     /**
@@ -102,11 +101,11 @@ public class GameDataTest {
     public void testGetRound() {
         System.out.println("getRound");
         GameData instance = new GameData();
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getRound();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+     
     }
 
     /**
@@ -118,7 +117,9 @@ public class GameDataTest {
         GameData instance = new GameData();
         instance.nextRound();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(2, instance.getRound());
+        instance.nextRound();
+        assertEquals(3, instance.getRound());
     }
 
     /**
@@ -132,7 +133,7 @@ public class GameDataTest {
         int result = instance.getMonstersDefeated();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -144,7 +145,9 @@ public class GameDataTest {
         GameData instance = new GameData();
         instance.defeatMonster();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(1, instance.getMonstersDefeated());
+        instance.defeatMonster();
+        assertEquals(2, instance.getMonstersDefeated());
     }
 
     /**
@@ -154,11 +157,8 @@ public class GameDataTest {
     public void testGetContext() {
         System.out.println("getContext");
         GameData instance = new GameData();
-        GameContext expResult = null;
         GameContext result = instance.getContext();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
@@ -168,11 +168,10 @@ public class GameDataTest {
     public void testGetPlayer() {
         System.out.println("getPlayer");
         GameData instance = new GameData();
-        Player expResult = null;
         Player result = instance.getPlayer();
-        assertEquals(expResult, result);
+        assertNotNull(result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(100, result.getHealth());
     }
 
     /**
@@ -182,11 +181,9 @@ public class GameDataTest {
     public void testGetMonster() {
         System.out.println("getMonster");
         GameData instance = new GameData();
-        Monster expResult = null;
-        Monster result = instance.getMonster();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getMonster()); 
+        
+        
     }
 
     /**
@@ -195,11 +192,11 @@ public class GameDataTest {
     @Test
     public void testSetMonster() {
         System.out.println("setMonster");
-        Monster monster = null;
         GameData instance = new GameData();
+        Monster monster = new Monster();
+        monster.setup();
         instance.setMonster(monster);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertSame(monster, instance.getMonster());
     }
 
     /**
@@ -209,11 +206,10 @@ public class GameDataTest {
     public void testGetScanner() {
         System.out.println("getScanner");
         GameData instance = new GameData();
-        Scanner expResult = null;
         Scanner result = instance.getScanner();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+        
+        
     }
 
     /**
@@ -224,8 +220,7 @@ public class GameDataTest {
         System.out.println("closeScanner");
         GameData instance = new GameData();
         instance.closeScanner();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
