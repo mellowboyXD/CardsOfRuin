@@ -1,5 +1,7 @@
 package ca.sheridancollege.cor.view;
 
+import ca.sheridancollege.cor.controller.GameController;
+
 import java.util.List;
 
 public class Console {
@@ -11,6 +13,14 @@ public class Console {
      */
     public static void printLabelAwake(String labelMessage) {
         System.out.printf("%n===== %s =====%n", labelMessage);
+    }
+
+    /**
+     * Prints the title without sleeping.
+     * @param title - the title of the game
+     */
+    public static void printTitleAwake(String title) {
+        System.out.printf("%n----- %s -----%n", title);
     }
 
     /**
@@ -63,5 +73,9 @@ public class Console {
         } catch (InterruptedException e) {
             System.out.println("Thread sleep was interrupted");
         }
+    }
+
+    public static void exit(GameController controller) {
+        controller.exit();
     }
 }

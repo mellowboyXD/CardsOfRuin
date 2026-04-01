@@ -1,5 +1,6 @@
 package ca.sheridancollege.cor.model;
 
+import ca.sheridancollege.cor.controller.GameController;
 import ca.sheridancollege.cor.states.GameContext;
 
 import java.util.Scanner;
@@ -75,12 +76,18 @@ public class GameData {
     private int monstersDefeated;
 
     /**
+     * The game controller.
+     */
+    private final GameController controller;
+
+    /**
      * Constructs a new GameData instance and initializes all game components.
      * Calls {@link #setup()} to establish the initial game state.
      */
-    public GameData() {
+    public GameData(GameController controller, GameContext context) {
+        this.controller = controller;
+        this.context = context;
         player = new Player();
-        context = new GameContext();
         scanner = new Scanner(System.in);
         deck = new Deck(DECK_SIZE);
         setup();
@@ -105,7 +112,7 @@ public class GameData {
         player.setup();
         round = 1;
         monstersDefeated = 0;
-        deck.setup(); // Initialize deck with cards
+        deck.reset(); // Initialize deck with cards
         hand = null;  // Hand starts empty, will be drawn when game begins
         monster = null; // No monster initially
     }
@@ -171,7 +178,7 @@ public class GameData {
     public void defeatMonster() {
         monster = null;
         monstersDefeated++;
-        round++;
+        nextRound();
     }
 
     /**
@@ -190,6 +197,8 @@ public class GameData {
     public GameContext getContext() {
         return context;
     }
+
+    public GameController getController() { return controller; }
 
     /**
      * Gets the player entity.

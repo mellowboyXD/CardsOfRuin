@@ -57,7 +57,6 @@ public class MenuState implements GameState {
      */
     @Override
     public void enter() {
-        Console.println("==== CARDS OF RUIN ====");
         if (data.inNewGame()) {
             Console.printOptions(new ArrayList<>(List.of(
                     "Start New Game",
@@ -96,7 +95,7 @@ public class MenuState implements GameState {
                     switch (choice) {
                         case 1 -> startOrContinueGame = true;
                         case 2 -> showGameRules();
-                        case 3 -> System.exit(0);
+                        case 3 -> quitGame();
                         default -> throw new IllegalStateException("Invalid option! Choose between 1-3.");
                     }
                 } else {
@@ -106,7 +105,7 @@ public class MenuState implements GameState {
                         case 2 -> showDeck();
                         case 3 -> showPlayerStats();
                         case 4 -> showGameRules();
-                        case 5 -> System.exit(0);
+                        case 5 -> quitGame();
                         default -> throw new IllegalStateException("Invalid Option! Choose between 1-5.");
                     }
                 }
@@ -123,7 +122,7 @@ public class MenuState implements GameState {
      * Displays a message indicating the start of the setup phase.
      */
     @Override
-    public void exit() {
+    public void end() {
         Console.printLabelAwake("SETUP PHASE");
         InputController.pressEnterToContinue(data.getScanner());
     }
@@ -165,5 +164,9 @@ public class MenuState implements GameState {
 
     private void showGameRules() {
         Console.printLabelAwake("GAME RULES");
+    }
+
+    private void quitGame() {
+        Console.exit(data.getController());
     }
 }

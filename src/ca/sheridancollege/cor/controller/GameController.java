@@ -2,7 +2,7 @@ package ca.sheridancollege.cor.controller;
 
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.states.GameContext;
-import ca.sheridancollege.cor.states.MenuState;
+import ca.sheridancollege.cor.view.Console;
 
 /**
  * The class that models your game. You should create a more specific child of this class and instantiate the methods
@@ -12,26 +12,35 @@ import ca.sheridancollege.cor.states.MenuState;
  */
 public class GameController {
 	private final String title;
-    private GameContext context;
+    private final GameContext context;
+	private final GameData data;
 
 	public GameController(String title) {
 		this.title = title;
-		setup();
+		context = new GameContext();
+		data = new GameData(this, context);
 	}
 
 	public final void setup() {
-        GameData data = new GameData();
-		context = new GameContext();
-		context.setState(new MenuState(data));
-	}
-
-	public String getTitle() {
-		return title;
+		context.resetState(data);
 	}
 
 	public void run() {
-		while (true) {
-			context.update();
+		Console.printTitleAwake(title.toUpperCase());
+		setup();
+		while (context.isGameRunning()) {
+			try {
+				context.update();
+			} catch (Exception ex) {
+				Console.printlnAwake("Game ran into a problem: " + ex.getMessage());
+				Console.exit(this);
+			}
 		}
+		InputController.pressEnterToContinue(data.getScanner(), "Press enter to exit...");
+		data.closeScanner();
+	}
+
+	public void exit() {
+		context.shouldExitGame();
 	}
 }

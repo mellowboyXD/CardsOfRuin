@@ -8,9 +8,13 @@ import java.util.Scanner;
  * @author mellowboy
  */
 public class InputController {
-    public static void pressEnterToContinue(Scanner scanner) {
-        System.out.print("Press enter to continue...");
+    public static void pressEnterToContinue(Scanner scanner, String message) {
+        System.out.print(message);
         scanner.nextLine();
+    }
+
+    public static void pressEnterToContinue(Scanner scanner) {
+        pressEnterToContinue(scanner, "Press enter to continue...");
     }
 
     public static int readInt(Scanner scanner) throws InputMismatchException {

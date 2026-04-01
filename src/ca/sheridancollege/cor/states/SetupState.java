@@ -71,7 +71,7 @@ public class SetupState implements GameState {
     }
 
     @Override
-    public void exit() {
+    public void end() {
         Console.printLabelAwake("PICK PHASE");
     }
 

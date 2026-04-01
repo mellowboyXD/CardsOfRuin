@@ -70,7 +70,7 @@ public class CombatState implements GameState{
     }
 
     @Override
-    public void exit() {
+    public void end() {
         Console.printLabelAwake("REWARD PHASE");
     }
 

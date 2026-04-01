@@ -110,7 +110,7 @@ public class DrawCardState implements GameState {
      * TODO: Add any necessary cleanup of temporary state variables
      */
     @Override
-    public void exit() {
+    public void end() {
         Console.printLabelAwake("COMBAT PHASE");
     }
 

@@ -7,6 +7,6 @@ package ca.sheridancollege.cor.states;
 public interface GameState {
 	void enter(); // setup for this
 	void update(); 
-	void exit();
+	void end();
 	GameState nextState(); // returns the next state or null (stay)
 }

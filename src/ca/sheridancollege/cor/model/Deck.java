@@ -41,6 +41,11 @@ public class Deck {
         shuffle();
     }
 
+    public final void reset() {
+        cards = new ArrayList<>();
+        setup();
+    }
+
     /**
      * @return the deck of cards.
      */
@@ -79,7 +84,7 @@ public class Deck {
     public String toString() {
         StringBuilder ret = new StringBuilder();
         for (Card card : cards) {
-            ret.append(card).append("\t");
+            ret.append(card).append("  ");
         }
         return ret.toString();
     }
