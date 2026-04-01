@@ -20,6 +20,11 @@ public class GameController {
 		context = new GameContext();
 		data = new GameData(this, context);
 	}
+        //Get Method for context
+        public GameContext getContext()
+        {
+            return context;
+        }
 
 	public final void setup() {
 		context.resetState(data);

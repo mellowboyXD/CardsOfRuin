@@ -7,8 +7,8 @@ import ca.sheridancollege.cor.controller.GameController;
  * @author mellowboy
  */
 public class Main {
-	static void main(String[] args) {
-		var gameController = new GameController("Cards Of Ruins");
+    public static void main(String[] args) {
+		GameController gameController = new GameController("Cards Of Ruins");
 
 		// Run the game
 		gameController.run();
