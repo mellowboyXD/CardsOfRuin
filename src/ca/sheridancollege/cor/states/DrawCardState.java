@@ -3,9 +3,9 @@ package ca.sheridancollege.cor.states;
 import ca.sheridancollege.cor.model.cards.Card;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Hand;
-import ca.sheridancollege.cor.view.ConsoleView;
+import ca.sheridancollege.cor.controller.InputController;
+import ca.sheridancollege.cor.view.Console;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -60,16 +60,12 @@ public class DrawCardState implements GameState {
      * Displays the player's current hand with numbered options.
      * Each card is shown with its details, and the total hand size is displayed.
      * Called when entering this state.
-     * <p>
      * TODO: Consider moving display logic to a separate view class
      * TODO: Add visual formatting improvements for better readability
      */
     @Override
     public void enter() {
-        System.out.println("Size: " + hand.getCards().size());
-        for (int i = 0; i < hand.getSize(); i++) {
-            System.out.println("| " + (i + 1) + ". " + hand.getCards().get(i) + " | ");
-        }
+        Console.printOptions(hand.getCards());
     }
 
     /**
@@ -88,23 +84,23 @@ public class DrawCardState implements GameState {
         int choice;
         do {
             try {
-                System.out.print("> ");
-                choice = ConsoleView.readInt(scanner);
+                Console.print("pick a card > ");
+                choice = InputController.readInt(scanner);
                 if (choice > hand.getSize() || choice < 1)
                     throw new IllegalStateException("Invalid choice");
             } catch (IllegalStateException ex) {
                 // Handle out-of-range selections
-                System.out.println("Invalid option. Try again.");
+                Console.println("Invalid option. Try again.");
                 choice = -1;    // Reset choice to continue loop
             }
         } while (choice == -1); // Continue until valid input received
 
         var selectedCard = hand.draw(choice - 1);
-        System.out.println("Selected card: " + selectedCard);
+        Console.println("Selected card: " + selectedCard);
         selectedCard.apply(data.getPlayer(), data.getMonster());
-        System.out.println("Player: " + data.getPlayer());
+        Console.println("Player: " + data.getPlayer());
 
-        ConsoleView.pressEnterToContinue(scanner);
+        InputController.pressEnterToContinue(scanner);
         ready = true;
     }
 
@@ -115,13 +111,14 @@ public class DrawCardState implements GameState {
      */
     @Override
     public void exit() {
-        System.out.println("===== COMBAT PHASE =====");
+        Console.printLabelAwake("COMBAT PHASE");
     }
 
     /**
      * Determines the next state after card selection.
      * Currently, throws UnsupportedOperationException as the next state
      * (combat phase) is not yet implemented.
+     *
      * @return The next game state: combat phase
      */
     @Override

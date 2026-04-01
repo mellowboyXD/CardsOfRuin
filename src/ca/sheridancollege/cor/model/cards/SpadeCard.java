@@ -2,6 +2,7 @@ package ca.sheridancollege.cor.model.cards;
 
 import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.model.Player;
+import ca.sheridancollege.cor.view.Console;
 
 /**
  * This is the class for the type Spades.
@@ -18,8 +19,8 @@ public class SpadeCard extends Card {
     /**
      * Increase player's attack by card value. If attack is already at max value, notify.
      *
-     * @param player
-     * @param monster
+     * @param player - the player
+     * @param monster - the monster
      */
     @Override
     public void apply(Player player, Monster monster) {
@@ -27,9 +28,9 @@ public class SpadeCard extends Card {
         var newAttack = playerAttack + getValue();
         if (newAttack <= player.getMaxAttack()) {
             player.setAttack(newAttack);
-            System.out.println("Gained attack points!");
+            Console.println("You gained %d attack points!".formatted(getValue()));
         } else {
-            System.out.println("Attack is already at max!");
+            Console.println("Your attack is already at max!");
         }
     }
 }

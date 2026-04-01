@@ -1,6 +1,5 @@
-package ca.sheridancollege.cor.view;
+package ca.sheridancollege.cor.controller;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ import java.util.Scanner;
  *
  * @author mellowboy
  */
-public class ConsoleView {
+public class InputController {
     public static void pressEnterToContinue(Scanner scanner) {
         System.out.print("Press enter to continue...");
         scanner.nextLine();

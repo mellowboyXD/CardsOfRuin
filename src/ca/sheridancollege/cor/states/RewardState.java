@@ -3,7 +3,8 @@ package ca.sheridancollege.cor.states;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.model.Player;
-import ca.sheridancollege.cor.view.ConsoleView;
+import ca.sheridancollege.cor.controller.InputController;
+import ca.sheridancollege.cor.view.Console;
 
 import java.util.Scanner;
 
@@ -26,26 +27,26 @@ public class RewardState implements GameState {
     public void enter() {
         var monsterIdx = gameData.getMonstersDefeated() + 1;
         if (monster.getHealth() <= 0) {
-            System.out.printf("Hooray!! Monster #%d was defeated.\n", monsterIdx);
-            System.out.println("You get some points!");
+            Console.println("Hooray!! Monster #%d was defeated.".formatted(monsterIdx));
+            Console.println("You get some points!");
             gameData.defeatMonster();
-            System.out.printf("Beginning round %d...\n", gameData.getRound());
+            Console.println("Beginning round %d...".formatted(gameData.getRound()));
         } else if (player.getHealth() <= 0) {
-            System.out.println("You lost!");
-            System.out.printf("You lasted %d rounds", gameData.getRound());
-            System.out.println("Better luck next time");
+            Console.println("You lost!");
+            Console.println("You lasted %d rounds".formatted(gameData.getRound()));
+            Console.println("Better luck next time");
         }
     }
 
     @Override
     public void update() {
-        ConsoleView.pressEnterToContinue(scanner);
+        InputController.pressEnterToContinue(scanner);
         ready = true;
     }
 
     @Override
     public void exit() {
-        System.out.println("===== =====");
+        Console.printLabelAwake("");
     }
 
     @Override

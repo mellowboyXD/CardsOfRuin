@@ -1,7 +1,7 @@
 package ca.sheridancollege.cor.model;
 
 import ca.sheridancollege.cor.states.GameContext;
-import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -14,7 +14,7 @@ import java.util.Scanner;
  * - State management context
  * This class follows the principle of centralizing game state to facilitate
  * easy data sharing between different game states and components.
- * 
+ *
  * @author mellowboy
  * @see GameContext
  * @see Player
@@ -23,35 +23,55 @@ import java.util.Scanner;
  * @see Hand
  */
 public class GameData {
-    
-    /** The maximum number of cards allowed in the player's deck */
+
+    /**
+     * The maximum number of cards allowed in the player's deck
+     */
     public static int DECK_SIZE = 15;
-    
-    /** The maximum number of cards the player can hold in their hand at once */
+
+    /**
+     * The maximum number of cards the player can hold in their hand at once
+     */
     public static int HAND_SIZE = 3;
 
-    /** The game state machine context that manages state transitions */
+    /**
+     * The game state machine context that manages state transitions
+     */
     private final GameContext context;
-    
-    /** The player entity containing player-specific attributes and stats */
+
+    /**
+     * The player entity containing player-specific attributes and stats
+     */
     private final Player player;
-    
-    /** The current monster entity being fought, null if no active monster */
+
+    /**
+     * The current monster entity being fought, null if no active monster
+     */
     private Monster monster;
-    
-    /** Scanner instance for handling user input throughout the game */
+
+    /**
+     * Scanner instance for handling user input throughout the game
+     */
     private final Scanner scanner;
-    
-    /** The player's complete collection of available cards */
+
+    /**
+     * The player's complete collection of available cards
+     */
     private final Deck deck;
-    
-    /** The player's current hand of cards drawn from the deck */
+
+    /**
+     * The player's current hand of cards drawn from the deck
+     */
     private Hand hand;
-    
-    /** The current round number in the game (starts at 1) */
+
+    /**
+     * The current round number in the game (starts at 1)
+     */
     private int round;
-    
-    /** Counter tracking how many monsters the player has defeated */
+
+    /**
+     * Counter tracking how many monsters the player has defeated
+     */
     private int monstersDefeated;
 
     /**
@@ -92,7 +112,7 @@ public class GameData {
 
     /**
      * Gets the player's current hand of cards.
-     * 
+     *
      * @return The current Hand object, or null if no hand has been drawn yet
      */
     public Hand getHand() {
@@ -102,7 +122,7 @@ public class GameData {
     /**
      * Sets the player's current hand of cards.
      * Typically called when drawing cards from the deck.
-     * 
+     *
      * @param cards The new Hand object containing the player's cards
      */
     public void setHand(Hand cards) {
@@ -111,7 +131,7 @@ public class GameData {
 
     /**
      * Gets the player's complete deck of cards.
-     * 
+     *
      * @return The Deck object containing all player cards
      */
     public Deck getDeck() {
@@ -120,7 +140,7 @@ public class GameData {
 
     /**
      * Gets the current round number.
-     * 
+     *
      * @return The current round (starts at 1)
      */
     public int getRound() {
@@ -137,7 +157,7 @@ public class GameData {
 
     /**
      * Gets the total number of monsters defeated by the player.
-     * 
+     *
      * @return The count of defeated monsters
      */
     public int getMonstersDefeated() {
@@ -155,8 +175,16 @@ public class GameData {
     }
 
     /**
+     *
+     * @return true if a game should continue and false if a new game should be created
+     */
+    public boolean inNewGame() {
+        return hand == null;
+    }
+
+    /**
      * Gets the game context that manages state transitions.
-     * 
+     *
      * @return The GameContext object controlling the game flow
      */
     public GameContext getContext() {
@@ -165,7 +193,7 @@ public class GameData {
 
     /**
      * Gets the player entity.
-     * 
+     *
      * @return The Player object containing player stats and attributes
      */
     public Player getPlayer() {
@@ -174,7 +202,7 @@ public class GameData {
 
     /**
      * Gets the current monster entity.
-     * 
+     *
      * @return The current Monster object, or null if no active monster
      */
     public Monster getMonster() {
@@ -184,7 +212,7 @@ public class GameData {
     /**
      * Sets the current monster entity.
      * Called when a new monster encounter begins.
-     * 
+     *
      * @param monster The new Monster object to be fought
      */
     public void setMonster(Monster monster) {
@@ -193,7 +221,7 @@ public class GameData {
 
     /**
      * Gets the scanner instance for user input.
-     * 
+     *
      * @return The Scanner object used for reading console input
      */
     public Scanner getScanner() {
