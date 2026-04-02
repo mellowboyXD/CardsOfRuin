@@ -2,10 +2,11 @@ package ca.sheridancollege.cor.states;
 
 import java.util.ArrayList;
 
-import ca.sheridancollege.cor.model.cards.Card;
+import ca.sheridancollege.cor.controller.InputController;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Hand;
 import ca.sheridancollege.cor.model.Monster;
+import ca.sheridancollege.cor.view.Console;
 
 /**
  *
@@ -29,9 +30,17 @@ public class SetupState implements GameState {
             hand = new Hand(GameData.HAND_SIZE);
             hand.setCards(new ArrayList<>());
             for (int i = 0; i < hand.getSize(); i++) {
-                hand.getCards().add(data.getDeck().draw());
+                hand.getCards().add(data.getDeck().drawRandom());
             }
             data.setHand(hand);
+        }
+
+        if (hand.getSize() < GameData.HAND_SIZE) {
+            int oldSize = hand.getSize();
+            hand.setSize(GameData.HAND_SIZE);
+            for (int i = oldSize; i < hand.getSize(); i++) {
+                hand.getCards().add(data.getDeck().drawRandom());
+            }
         }
 
         var currentMonster = data.getMonster();
@@ -49,20 +58,21 @@ public class SetupState implements GameState {
             }
         }
 
-        System.out.println("==== PREPARE FOR BATTLE ====");
-        System.out.println("Monster #" + (data.getMonstersDefeated() + 1) + " " + currentMonster);
-        System.out.println("Your stats: " + data.getPlayer());
-        System.out.println("Your hand: " + data.getHand());
+        Console.printLabelAwake("PREPARE FOR BATTLE");
+        Console.println("Monster #" + (data.getMonstersDefeated() + 1) + ": " + currentMonster);
+        Console.println("Your stats: " + data.getPlayer());
+        Console.println("Your hand: " + data.getHand());
     }
 
     @Override
     public void update() {
+        InputController.pressEnterToContinue(data.getScanner());
         ready = true;
     }
 
     @Override
-    public void exit() {
-        System.out.println("\n==== PICK PHASE ====");
+    public void end() {
+        Console.printLabelAwake("PICK PHASE");
     }
 
     @Override

@@ -1,10 +1,11 @@
 package ca.sheridancollege.cor.states;
 
-import ca.sheridancollege.cor.model.cards.Card;
 import ca.sheridancollege.cor.model.GameData;
-import ca.sheridancollege.cor.view.ConsoleView;
+import ca.sheridancollege.cor.controller.InputController;
+import ca.sheridancollege.cor.view.Console;
 
-import java.util.InputMismatchException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -13,32 +14,41 @@ import java.util.Scanner;
  * - View their current deck
  * - Exit the game
  * This state serves as the entry point and navigation hub for the game.
- * 
+ *
  * @author mellowboy
  * @see GameState
  * @see SetupState
  */
 public class MenuState implements GameState {
 
-    /** Shared game data containing player information and game state */
+    /**
+     * Shared game data containing player information and game state
+     */
     private final GameData data;
-    
-    /** Scanner instance for reading user input */
+
+    /**
+     * Scanner instance for reading user input
+     */
     private final Scanner scanner;
-    
-    /** Flag indicating whether to transition to the game setup phase */
-    private boolean startGame;
+
+    /**
+     * Flag indicating whether to transition to the game setup phase
+     */
+    private boolean startOrContinueGame;
 
     /**
      * Constructs a new MenuState with the given game data.
-     * 
+     *
      * @param data The shared game data object containing player information
      *             and game configuration
      */
     public MenuState(GameData data) {
         this.data = data;
         this.scanner = data.getScanner();
-        this.startGame = false;
+        this.startOrContinueGame = false;
+        if (data.getPlayer().getHealth() <= 0) {
+            data.setup();
+        }
     }
 
     /**
@@ -47,10 +57,21 @@ public class MenuState implements GameState {
      */
     @Override
     public void enter() {
-        System.out.println("==== CARDS OF RUIN ====");
-        System.out.println("1. Play/Continue");
-        System.out.println("2. View Deck");
-        System.out.println("3. Exit");
+        if (data.inNewGame()) {
+            Console.printOptions(new ArrayList<>(List.of(
+                    "Start New Game",
+                    "View Game Rules",
+                    "Exit"
+            )));
+        } else {
+            Console.printOptions(new ArrayList<>(List.of(
+                    "Continue",
+                    "View Deck",
+                    "My Stats",
+                    "Review Game Rules",
+                    "Exit"
+            )));
+        }
     }
 
     /**
@@ -64,20 +85,33 @@ public class MenuState implements GameState {
      */
     @Override
     public void update() {
-        int choice = -1;
+        int choice;
         do {
-            System.out.print("> ");
+            System.out.print("choose from menu > ");
             try {
-                choice = ConsoleView.readInt(scanner);
-                switch (choice) {
-                    case 1 -> startGame = true;           // Proceed to game setup
-                    case 2 -> showDeck();                  // Display player's deck
-                    case 3 -> System.exit(0);              // Exit the application
-                    default -> throw new IllegalStateException("Invalid Option");
+                choice = InputController.readInt(scanner);
+                if (data.inNewGame()) {
+                    // handle inputs for when not in game
+                    switch (choice) {
+                        case 1 -> startOrContinueGame = true;
+                        case 2 -> showGameRules();
+                        case 3 -> quitGame();
+                        default -> throw new IllegalStateException("Invalid option! Choose between 1-3.");
+                    }
+                } else {
+                    // handle input for when in game
+                    switch (choice) {
+                        case 1 -> startOrContinueGame = true; // Proceed to game setup
+                        case 2 -> showDeck();
+                        case 3 -> showPlayerStats();
+                        case 4 -> showGameRules();
+                        case 5 -> quitGame();
+                        default -> throw new IllegalStateException("Invalid Option! Choose between 1-5.");
+                    }
                 }
             } catch (IllegalStateException ex) {
                 // Handle out-of-range menu selections
-                System.out.println("Invalid Input. Choose between 1 to 3.");
+                Console.println(ex.getMessage());
                 choice = -1;    // Reset choice to continue loop
             }
         } while (choice == -1); // Continue until valid input received
@@ -88,19 +122,20 @@ public class MenuState implements GameState {
      * Displays a message indicating the start of the setup phase.
      */
     @Override
-    public void exit() {
-        System.out.println("\n==== SETUP PHASE ====");
+    public void end() {
+        Console.printLabelAwake("SETUP PHASE");
+        InputController.pressEnterToContinue(data.getScanner());
     }
 
     /**
      * Determines the next state based on user selection.
-     * 
+     *
      * @return SetupState if player chose to start game,
-     *         null to remain in current state
+     * null to remain in current state
      */
     @Override
     public GameState nextState() {
-        if (startGame)
+        if (startOrContinueGame)
             return new SetupState(data);
 
         // Stay in current state if no valid transition requested
@@ -113,13 +148,25 @@ public class MenuState implements GameState {
      * TODO: Consider adding empty deck message
      */
     private void showDeck() {
-        System.out.println("\n==== Deck ====");
+        Console.printLabelAwake("DECK");
         var deck = data.getDeck();
         if (deck != null) {
-            for (Card c : deck.getCards()) {
-                System.out.println(c);
-            }
+            Console.println(deck.toString());
         }
-        
+    }
+
+    private void showPlayerStats() {
+        Console.printLabelAwake("MY STATS");
+        Console.printlnAwake(data.getPlayer().toString());
+        Console.printlnAwake("Round: " + data.getRound());
+        Console.println("Monsters defeated: " + data.getMonstersDefeated());
+    }
+
+    private void showGameRules() {
+        Console.printLabelAwake("GAME RULES");
+    }
+
+    private void quitGame() {
+        Console.exit(data.getController());
     }
 }

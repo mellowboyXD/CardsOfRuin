@@ -12,18 +12,10 @@ public class CardGenerator {
     public static Card generateCard() {
         int suitValue = random.nextInt(Suit.MAX_SUITS) + 1;
         return switch (suitValue) {
-            case 1 -> {
-                yield new HeartCard(generateRandomValue());
-            }
-            case 2 -> {
-                yield new DiamondCard(generateRandomValue());
-            }
-            case 3 -> {
-                yield new ClubCard(generateRandomValue());
-            }
-            default -> {
-                yield new SpadeCard(generateRandomValue());
-            }
+            case 1 -> new HeartCard(generateRandomValue());
+            case 2 -> new DiamondCard(generateRandomValue());
+            case 3 -> new ClubCard(generateRandomValue());
+            default -> new SpadeCard(generateRandomValue());
         };
     }
 

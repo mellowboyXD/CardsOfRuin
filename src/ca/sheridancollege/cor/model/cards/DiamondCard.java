@@ -2,6 +2,7 @@ package ca.sheridancollege.cor.model.cards;
 
 import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.model.Player;
+import ca.sheridancollege.cor.view.Console;
 
 /**
  * Diamond type card.
@@ -17,26 +18,28 @@ public class DiamondCard extends Card {
     /**
      * Increase player's attack by 3/4 of card's value and monster's shield by 1/4 of card's value.
      *
-     * @param player
-     * @param monster
+     * @param player - the player entity
+     * @param monster - the monster entity
      */
     @Override
     public void apply(Player player, Monster monster) {
         var playerAttack = player.getAttack();
         var monsterShield = monster.getShield();
-        var newPlayerAttack = (int) (playerAttack + (0.75 * getValue()));
-        var newMonsterShield = (int) (monsterShield + (0.25 * getValue()));
+        var playerAttackGain = (int) (0.75 * getValue());
+        var monsterShieldGain = (int) (0.25 * getValue());
+        var newPlayerAttack = playerAttack + playerAttackGain;
+        var newMonsterShield = monsterShield + monsterShieldGain;
 
         if (newPlayerAttack <= player.getMaxAttack()) {
             player.setAttack(newPlayerAttack);
-            System.out.println("Gained attack points!");
+            Console.println("You gained %d attack points!".formatted(playerAttackGain));
         } else {
-            System.out.println("Attack already at max value!");
+            Console.println("Your attack already at max value!");
         }
 
         if (newMonsterShield <= monster.getMaxShield()) {
             monster.setShield(newMonsterShield);
-            System.out.println("Monster gained %d shield!".formatted(newMonsterShield));
+            Console.println("Monster gained %d shield!%n".formatted(monsterShieldGain));
         }
     }
 }

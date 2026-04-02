@@ -2,6 +2,7 @@ package ca.sheridancollege.cor.model.cards;
 
 import ca.sheridancollege.cor.model.Player;
 import ca.sheridancollege.cor.model.Monster;
+import ca.sheridancollege.cor.view.Console;
 
 /**
  * This class is a card of type heart. It implements apply.
@@ -17,8 +18,8 @@ public class HeartCard extends Card {
 
     /**
      * Increase player's health by card value. Notify if health is already at max value.
-     * @param player
-     * @param monster
+     * @param player - the player entity
+     * @param monster - the monster entity
      */
     @Override
     public void apply(Player player, Monster monster) {
@@ -26,9 +27,9 @@ public class HeartCard extends Card {
         var newHealth = playerHealth + getValue();
         if (newHealth <= player.getMaxHealth()) {
             player.setHealth(newHealth);
-            System.out.println("Gained health points!");
+            Console.println("You gained %d health points!".formatted(getValue()));
         } else {
-            System.out.println("Already at max health points!");
+            Console.println("Your health is already at max!");
         }
     }
 }

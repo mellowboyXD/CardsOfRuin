@@ -17,7 +17,7 @@ public class Deck {
 
     // The group of cards, stored in a List
     private List<Card> cards;
-    private final int size;
+    private int size;
     private final Random rand;
 
     public Deck(int size) {
@@ -41,6 +41,11 @@ public class Deck {
         shuffle();
     }
 
+    public final void reset() {
+        cards = new ArrayList<>();
+        setup();
+    }
+
     /**
      * @return the deck of cards.
      */
@@ -56,7 +61,7 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    public Card draw() {
+    public Card drawRandom() {
         return cards.get(getRandomIndex());
     }
 
@@ -67,6 +72,10 @@ public class Deck {
         return size;
     }
 
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public int getRandomIndex() {
         return rand.nextInt(cards.size());
     }
@@ -75,7 +84,7 @@ public class Deck {
     public String toString() {
         StringBuilder ret = new StringBuilder();
         for (Card card : cards) {
-            ret.append(card).append("\t");
+            ret.append(card).append("  ");
         }
         return ret.toString();
     }

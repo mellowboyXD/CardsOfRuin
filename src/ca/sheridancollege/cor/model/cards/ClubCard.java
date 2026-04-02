@@ -2,6 +2,7 @@ package ca.sheridancollege.cor.model.cards;
 
 import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.model.Player;
+import ca.sheridancollege.cor.view.Console;
 
 /**
  * Club type card.
@@ -17,8 +18,8 @@ public class ClubCard extends Card {
 
     /**
      * Increase player's shield by card value. Notify if already at max shield.
-     * @param player
-     * @param monster
+     * @param player - the player entity
+     * @param monster - the monster entity
      */
     @Override
     public void apply(Player player, Monster monster) {
@@ -26,9 +27,9 @@ public class ClubCard extends Card {
         var newShield = playerShield + getValue();
         if (newShield <= player.getMaxShield()) {
             player.setShield(newShield);
-            System.out.println("Gained shield!");
+            Console.println("You gained %d shield!%n".formatted(getValue()));
         } else {
-            System.out.println("Shield is already at max value!");
+            Console.println("Your shield is already at max value!");
         }
     }
 }
