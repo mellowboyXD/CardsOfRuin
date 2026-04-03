@@ -2,7 +2,7 @@ package ca.sheridancollege.cor.model;
 
 /**
  * This is the monster class, and it uses a builder design pattern to create a new monster.
- * It allows the class to be flexible and monster creation do now have to be bound to constructors.
+ * It allows the class to be flexible and monster creation do not have to be bound to constructors.
  * @author mellowboy
  */
 public class Monster extends Entity {
