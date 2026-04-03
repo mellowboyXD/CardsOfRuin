@@ -33,4 +33,9 @@ public class SpadeCard extends Card {
             Console.println("Your attack is already at max!");
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Attack)";
+    }
 }

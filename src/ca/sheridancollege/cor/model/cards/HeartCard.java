@@ -32,4 +32,9 @@ public class HeartCard extends Card {
             Console.println("Your health is already at max!");
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Health)";
+    }
 }

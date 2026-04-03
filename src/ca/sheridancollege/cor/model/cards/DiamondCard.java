@@ -42,4 +42,9 @@ public class DiamondCard extends Card {
             Console.println("Monster gained %d shield!%n".formatted(monsterShieldGain));
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Attack *)";
+    }
 }
