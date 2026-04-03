@@ -1,7 +1,9 @@
 package ca.sheridancollege.cor.model;
 
 import ca.sheridancollege.cor.controller.GameController;
+import ca.sheridancollege.cor.controller.EntityModifierOnEachRoundController;
 import ca.sheridancollege.cor.states.GameContext;
+import ca.sheridancollege.cor.view.Console;
 
 import java.util.Scanner;
 
@@ -78,18 +80,24 @@ public class GameData {
     /**
      * The game controller.
      */
-    private final GameController controller;
+    private final GameController gameController;
+
+    /**
+     * The monster controller.
+     */
+    private final EntityModifierOnEachRoundController entityModifierOnEachRoundController;
 
     /**
      * Constructs a new GameData instance and initializes all game components.
      * Calls {@link #setup()} to establish the initial game state.
      */
-    public GameData(GameController controller, GameContext context) {
-        this.controller = controller;
+    public GameData(GameController gameController, GameContext context) {
+        this.gameController = gameController;
         this.context = context;
         player = new Player();
         scanner = new Scanner(System.in);
         deck = new Deck(DECK_SIZE);
+        entityModifierOnEachRoundController = EntityModifierOnEachRoundController.getInstance();
         setup();
     }
 
@@ -179,6 +187,8 @@ public class GameData {
         monster = null;
         monstersDefeated++;
         nextRound();
+        entityModifierOnEachRoundController.updatePlayer(player, round);
+        Console.println("Your new stats: " + player.toString());
     }
 
     /**
@@ -198,7 +208,11 @@ public class GameData {
         return context;
     }
 
-    public GameController getController() { return controller; }
+    public GameController getGameController() { return gameController; }
+
+    public EntityModifierOnEachRoundController entityRoundController() {
+        return entityModifierOnEachRoundController;
+    }
 
     /**
      * Gets the player entity.
