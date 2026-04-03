@@ -83,7 +83,7 @@ public class GameData {
     private final GameController gameController;
 
     /**
-     * The monster controller.
+     * The entity updater controller.
      */
     private final EntityModifierOnEachRoundController entityModifierOnEachRoundController;
 
