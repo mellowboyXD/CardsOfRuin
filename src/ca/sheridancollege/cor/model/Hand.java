@@ -28,4 +28,13 @@ public class Hand extends Deck {
         }
         return this.getCards().remove(index);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder ret = new StringBuilder();
+        for (Card card : getCards()) {
+            ret.append(card).append(" ");
+        }
+        return ret.toString();
+    }
 }
