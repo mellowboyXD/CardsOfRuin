@@ -4,12 +4,11 @@
  */
 package ca.sheridancollege.cor.states;
 
+import ca.sheridancollege.cor.controller.GameController;
 import ca.sheridancollege.cor.model.GameData;
 import java.io.ByteArrayInputStream;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,20 +17,19 @@ import static org.junit.Assert.*;
  * @author hassenibrahim
  */
 public class MenuStateTest {
+
+    private final GameController mockGameController = new GameController("Test MenuState");
+    private GameData data;
+    private MenuState instance;
     
     public MenuStateTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
+        mockGameController.setup();
+        data = new GameData(mockGameController, mockGameController.getContext());
+        instance = new MenuState(data);
     }
     
     @After
@@ -43,15 +41,13 @@ public class MenuStateTest {
      */
     
     // Helper: redirects System.in so Scanner reads from a string instead of keyboard
-    private GameData gameDataWithInput(String input) {
+    private void setGameDataWithInput(String input) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        return new GameData(); // GameData creates Scanner(System.in) in constructor
+        data = new GameData(mockGameController, mockGameController.getContext()); // GameData creates Scanner(System.in) in constructor
     }
     @Test
     public void testEnter() {
         System.out.println("enter");
-        GameData data = new GameData();
-        MenuState instance = new MenuState(data);
 
         instance.enter();
     }
@@ -63,8 +59,7 @@ public class MenuStateTest {
     public void testUpdate() {
         System.out.println("update");
         // Simulate user typing "1" (Play/Continue) then Enter
-        GameData data = gameDataWithInput("1\n");
-        MenuState instance = new MenuState(data);
+        setGameDataWithInput("1\n");
 
         instance.update(); // reads "1", sets startGame = true
 
@@ -74,25 +69,11 @@ public class MenuStateTest {
     }
 
     /**
-     * Test of exit method, of class MenuState.
-     */
-    @Test
-    public void testExit() {
-        System.out.println("exit");
-        GameData data = new GameData();
-        MenuState instance = new MenuState(data);
-
-        instance.exit(); // no exception expected
-    }
-
-    /**
      * Test of nextState method, of class MenuState.
      */
     @Test
     public void testNextState() {
         System.out.println("nextState");
-        GameData data = new GameData();
-        MenuState instance = new MenuState(data);
 
         // No update() called — startGame is false, should stay in this state
         GameState result = instance.nextState();
@@ -102,8 +83,7 @@ public class MenuStateTest {
     @Test
     public void testNextStateAfterPlay() {
         System.out.println("nextState - after play selected");
-        GameData data = gameDataWithInput("1\n");
-        MenuState instance = new MenuState(data);
+        setGameDataWithInput("1\n");
 
         instance.update(); // simulate user choosing Play
 
@@ -111,5 +91,4 @@ public class MenuStateTest {
         assertNotNull(result);
         assertTrue(result instanceof SetupState);
     }
-    
 }

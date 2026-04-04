@@ -4,12 +4,11 @@
  */
 package ca.sheridancollege.cor.model;
 
+import ca.sheridancollege.cor.controller.GameController;
 import ca.sheridancollege.cor.states.GameContext;
 import java.util.Scanner;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,20 +17,17 @@ import static org.junit.Assert.*;
  * @author hassenibrahim
  */
 public class GameDataTest {
+    private final GameController mockGameController = new GameController("Test Mock Controller");
+    private GameData instance;
     
     public GameDataTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
+        mockGameController.setup();
+        var mockGameContext = mockGameController.getContext();
+        instance = new GameData(mockGameController, mockGameContext);
     }
     
     @After
@@ -44,7 +40,6 @@ public class GameDataTest {
     @Test
     public void testSetup() {
         System.out.println("setup");
-        GameData instance = new GameData();
         instance.setup();
         // TODO review the generated test code and remove the default call to fail.
         instance.nextRound();
@@ -64,7 +59,6 @@ public class GameDataTest {
     @Test
     public void testGetHand() {
         System.out.println("getHand");
-        GameData instance = new GameData();
         assertNull(instance.getHand());
     }
 
@@ -74,11 +68,9 @@ public class GameDataTest {
     @Test
     public void testSetHand() {
         System.out.println("setHand");
-        Hand cards = null;
-        GameData instance = new GameData();
-        instance.setHand(cards);
+        instance.setHand(null);
         // TODO review the generated test code and remove the default call to fail.
-        assertSame(cards, instance.getHand());
+        assertSame(null, instance.getHand());
     }
 
     /**
@@ -87,7 +79,6 @@ public class GameDataTest {
     @Test
     public void testGetDeck() {
         System.out.println("getDeck");
-        GameData instance = new GameData();
         Deck result = instance.getDeck();
         assertNotNull(result);
         // TODO review the generated test code and remove the default call to fail.
@@ -100,7 +91,6 @@ public class GameDataTest {
     @Test
     public void testGetRound() {
         System.out.println("getRound");
-        GameData instance = new GameData();
         int expResult = 1;
         int result = instance.getRound();
         assertEquals(expResult, result);
@@ -114,7 +104,6 @@ public class GameDataTest {
     @Test
     public void testNextRound() {
         System.out.println("nextRound");
-        GameData instance = new GameData();
         instance.nextRound();
         // TODO review the generated test code and remove the default call to fail.
         assertEquals(2, instance.getRound());
@@ -128,7 +117,6 @@ public class GameDataTest {
     @Test
     public void testGetMonstersDefeated() {
         System.out.println("getMonstersDefeated");
-        GameData instance = new GameData();
         int expResult = 0;
         int result = instance.getMonstersDefeated();
         assertEquals(expResult, result);
@@ -142,7 +130,6 @@ public class GameDataTest {
     @Test
     public void testDefeatMonster() {
         System.out.println("defeatMonster");
-        GameData instance = new GameData();
         instance.defeatMonster();
         // TODO review the generated test code and remove the default call to fail.
         assertEquals(1, instance.getMonstersDefeated());
@@ -156,7 +143,6 @@ public class GameDataTest {
     @Test
     public void testGetContext() {
         System.out.println("getContext");
-        GameData instance = new GameData();
         GameContext result = instance.getContext();
         assertNotNull(result);
     }
@@ -167,7 +153,6 @@ public class GameDataTest {
     @Test
     public void testGetPlayer() {
         System.out.println("getPlayer");
-        GameData instance = new GameData();
         Player result = instance.getPlayer();
         assertNotNull(result);
         // TODO review the generated test code and remove the default call to fail.
@@ -180,10 +165,7 @@ public class GameDataTest {
     @Test
     public void testGetMonster() {
         System.out.println("getMonster");
-        GameData instance = new GameData();
-        assertNull(instance.getMonster()); 
-        
-        
+        assertNull(instance.getMonster());
     }
 
     /**
@@ -192,8 +174,7 @@ public class GameDataTest {
     @Test
     public void testSetMonster() {
         System.out.println("setMonster");
-        GameData instance = new GameData();
-        Monster monster = new Monster();
+        Monster monster = new Monster.Builder().build();
         monster.setup();
         instance.setMonster(monster);
         assertSame(monster, instance.getMonster());
@@ -205,11 +186,8 @@ public class GameDataTest {
     @Test
     public void testGetScanner() {
         System.out.println("getScanner");
-        GameData instance = new GameData();
         Scanner result = instance.getScanner();
         assertNotNull(result);
-        
-        
     }
 
     /**
@@ -218,9 +196,6 @@ public class GameDataTest {
     @Test
     public void testCloseScanner() {
         System.out.println("closeScanner");
-        GameData instance = new GameData();
         instance.closeScanner();
-        
     }
-    
 }

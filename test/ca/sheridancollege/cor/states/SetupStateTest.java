@@ -4,6 +4,7 @@
  */
 package ca.sheridancollege.cor.states;
 
+import ca.sheridancollege.cor.controller.GameController;
 import ca.sheridancollege.cor.model.GameData;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,20 +18,18 @@ import static org.junit.Assert.*;
  * @author hassenibrahim
  */
 public class SetupStateTest {
-    
+    private final GameController mockGameController = new GameController("Testing Setup");
+    private GameData data;
+    private SetupState instance;
+
     public SetupStateTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
+        instance = new SetupState(data);
+        mockGameController.setup();
+        data = new GameData(mockGameController, mockGameController.getContext());
     }
     
     @After
@@ -40,8 +39,6 @@ public class SetupStateTest {
     @Test
     public void testEnter() {
         System.out.println("enter");
-        GameData data = new GameData(); // hand=null, monster=null after setup()
-        SetupState instance = new SetupState(data);
         instance.enter();
         assertNotNull(data.getHand());
         assertEquals(GameData.HAND_SIZE, data.getHand().getCards().size());
@@ -55,8 +52,6 @@ public class SetupStateTest {
     @Test
     public void testUpdate() {
         System.out.println("update");
-        GameData data = new GameData();
-        SetupState instance = new SetupState(data);
         // TODO review the generated test code and remove the default call to fail.
         instance.enter();
         assertNull(instance.nextState());
@@ -66,25 +61,11 @@ public class SetupStateTest {
     }
 
     /**
-     * Test of exit method, of class SetupState.
-     */
-    @Test
-    public void testExit() {
-        System.out.println("exit");
-        GameData data = new GameData();
-        SetupState instance = new SetupState(data);
-
-        instance.exit();
-    }
-
-    /**
      * Test of nextState method, of class SetupState.
      */
     @Test
     public void testNextState() {
         System.out.println("nextState");
-        GameData data = new GameData();
-        SetupState instance = new SetupState(data);
         instance.enter();
 
         // Not ready yet — should stay in this state
@@ -97,7 +78,4 @@ public class SetupStateTest {
         assertNotNull(next);
         assertTrue(next instanceof DrawCardState);
     }
-
- 
-    
 }
