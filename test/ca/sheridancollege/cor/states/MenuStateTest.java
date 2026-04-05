@@ -41,9 +41,10 @@ public class MenuStateTest {
      */
     
     // Helper: redirects System.in so Scanner reads from a string instead of keyboard
-    private void setGameDataWithInput(String input) {
+    private void provideInput(String input) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         data = new GameData(mockGameController, mockGameController.getContext()); // GameData creates Scanner(System.in) in constructor
+        instance = new MenuState(data);
     }
     @Test
     public void testEnter() {
@@ -59,7 +60,7 @@ public class MenuStateTest {
     public void testUpdate() {
         System.out.println("update");
         // Simulate user typing "1" (Play/Continue) then Enter
-        setGameDataWithInput("1\n");
+        provideInput("1\n");
 
         instance.update(); // reads "1", sets startGame = true
 
@@ -83,7 +84,7 @@ public class MenuStateTest {
     @Test
     public void testNextStateAfterPlay() {
         System.out.println("nextState - after play selected");
-        setGameDataWithInput("1\n");
+        provideInput("1\n");
 
         instance.update(); // simulate user choosing Play
 

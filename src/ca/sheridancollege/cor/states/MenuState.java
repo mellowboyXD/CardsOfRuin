@@ -87,7 +87,7 @@ public class MenuState implements GameState {
     public void update() {
         int choice;
         do {
-            System.out.print("choose from menu > ");
+            Console.printAwake("choose from menu > ");
             try {
                 choice = InputController.readInt(scanner);
                 if (data.inNewGame()) {
