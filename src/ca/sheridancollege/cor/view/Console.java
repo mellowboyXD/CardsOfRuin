@@ -78,6 +78,14 @@ public class Console implements Sleeper {
         instance.sleep(Console.SLEEP_TIME_MS);
     }
 
+    /**
+     * Prints a message without sleeping
+     * @param message - the message to display
+     */
+    public static void printAwake(String message) {
+        System.out.print(message);
+    }
+
     @Override
     public void sleep(long ms) {
         try {
