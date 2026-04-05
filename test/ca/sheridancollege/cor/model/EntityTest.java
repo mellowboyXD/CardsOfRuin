@@ -9,6 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,24 +17,8 @@ import static org.junit.Assert.*;
  * @author hassenibrahim
  */
 public class EntityTest {
-    
+
     public EntityTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -51,11 +36,11 @@ public class EntityTest {
      * Test of setShield method, of class Entity.
      */
     @Test
-    public void testSetShield() {
+    public void testSetShieldExceedsMaxShield() {
         System.out.println("setShield");
         Entity instance = new EntityImpl();
-        instance.setShield(150);
-        assertEquals(150, instance.getShield());
+        instance.setShield(instance.getMaxShield() + 10);
+        assertEquals(instance.getMaxShield(), instance.getShield());
     }
 
     /**
@@ -75,10 +60,10 @@ public class EntityTest {
     @Test
     public void testGetHealth() {
         System.out.println("getHealth");
-             Entity instance = new EntityImpl();
-             assertEquals(0, instance.getHealth());
-             instance.setHealth(75);
-             assertEquals(75, instance.getHealth());
+        Entity instance = new EntityImpl();
+        assertEquals(0, instance.getHealth());
+        instance.setHealth(75);
+        assertEquals(75, instance.getHealth());
     }
 
     /**
@@ -114,7 +99,7 @@ public class EntityTest {
         Entity instance = new EntityImpl();
         assertEquals(200, instance.getMaxHealth());
         instance.setHealth(300);
-        assertEquals(0, instance.getHealth());
+        assertEquals(200, instance.getHealth());
     }
 
     /**
@@ -126,7 +111,7 @@ public class EntityTest {
         Entity instance = new EntityImpl();
         assertEquals(150, instance.getMaxAttack());
         instance.setAttack(200);
-        assertEquals(0, instance.getAttack());
+        assertEquals(150, instance.getAttack());
     }
 
     /**
@@ -138,7 +123,7 @@ public class EntityTest {
         Entity instance = new EntityImpl();
         assertEquals(300, instance.getMaxShield());
         instance.setShield(400);
-        assertEquals(0, instance.getShield());
+        assertEquals(300, instance.getShield());
     }
 
     /**
@@ -171,5 +156,5 @@ public class EntityTest {
         public void setup() {
         }
     }
-    
+
 }
