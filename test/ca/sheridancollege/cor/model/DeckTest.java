@@ -103,7 +103,7 @@ public class DeckTest {
         System.out.println("draw");
         Deck instance = new Deck(5);
         instance.setup();
-        Card result = instance.draw();
+        Card result = instance.drawRandom();
         assertNotNull(result);
         
     }

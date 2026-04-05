@@ -143,28 +143,28 @@ public class CardTest {
         instance.setValue(3);
 
         // null should be false
-        assertFalse(instance.equals(null));
+        assertNotEquals(null, instance);
 
         // Same object — true
-        assertTrue(instance.equals(instance));
+        assertEquals(instance, instance);
 
         // Same class, same suit and value — true
         Card same = new CardImpl();
         same.setSuit(Suit.HEARTS);
         same.setValue(3);
-        assertTrue(instance.equals(same));
+        assertEquals(instance, same);
 
         // Different value — false
         Card diffValue = new CardImpl();
         diffValue.setSuit(Suit.HEARTS);
         diffValue.setValue(5);
-        assertFalse(instance.equals(diffValue));
+        assertNotEquals(instance, diffValue);
 
         // Different suit — false
         Card diffSuit = new CardImpl();
         diffSuit.setSuit(Suit.SPADES);
         diffSuit.setValue(3);
-        assertFalse(instance.equals(diffSuit));
+        assertNotEquals(instance, diffSuit);
     }
 
     /**
@@ -175,14 +175,14 @@ public class CardTest {
         System.out.println("apply");
         Player player = new Player();
         player.setup();
-        Monster monster = new Monster();
+        Monster monster = new Monster.Builder().build();
         monster.setup();
         Card instance = new CardImpl();
 
         instance.apply(player, monster);
     }
 
-    public class CardImpl extends Card {
+    public static class CardImpl extends Card {
         @Override    
         public void apply(Player player, Monster monster) {
         }

@@ -4,12 +4,14 @@
  */
 package ca.sheridancollege.cor.states;
 
+import ca.sheridancollege.cor.controller.GameController;
 import ca.sheridancollege.cor.model.GameData;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+
 import static org.junit.Assert.*;
 
 /**
@@ -17,36 +19,45 @@ import static org.junit.Assert.*;
  * @author hassenibrahim
  */
 public class SetupStateTest {
-    
+    private final GameController mockGameController = new GameController("Testing Setup");
+    private GameData data;
+    private SetupState instance;
+
+    /**
+     * Replaces System.in with the input string
+     * @param input - the string that is meant to simulate whatever the user should type in.
+     */
+    private void provideInput(String input) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        data = new GameData(mockGameController, mockGameController.getContext()); // GameData creates Scanner(System.in) in constructor
+        instance = new SetupState(data);
+    }
+
     public SetupStateTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
+        mockGameController.setup();
+        data = new GameData(mockGameController, mockGameController.getContext());
+        instance = new SetupState(data);
     }
-    
+
     @After
-    public void tearDown(){}    /**
+    public void tearDown() {
+    }
+
+    /**
      * Test of enter method, of class SetupState.
      */
     @Test
     public void testEnter() {
         System.out.println("enter");
-        GameData data = new GameData(); // hand=null, monster=null after setup()
-        SetupState instance = new SetupState(data);
         instance.enter();
         assertNotNull(data.getHand());
         assertEquals(GameData.HAND_SIZE, data.getHand().getCards().size());
         assertNotNull(data.getMonster());
-        assertEquals(100, data.getMonster().getHealth());
+        assertEquals(10, data.getMonster().getHealth());
     }
 
     /**
@@ -55,26 +66,12 @@ public class SetupStateTest {
     @Test
     public void testUpdate() {
         System.out.println("update");
-        GameData data = new GameData();
-        SetupState instance = new SetupState(data);
-        // TODO review the generated test code and remove the default call to fail.
         instance.enter();
         assertNull(instance.nextState());
+        provideInput("\n"); // simulates pressing the enter key
         instance.update();
         assertNotNull(instance.nextState());
         assertTrue(instance.nextState() instanceof DrawCardState);
-    }
-
-    /**
-     * Test of exit method, of class SetupState.
-     */
-    @Test
-    public void testExit() {
-        System.out.println("exit");
-        GameData data = new GameData();
-        SetupState instance = new SetupState(data);
-
-        instance.exit();
     }
 
     /**
@@ -83,8 +80,6 @@ public class SetupStateTest {
     @Test
     public void testNextState() {
         System.out.println("nextState");
-        GameData data = new GameData();
-        SetupState instance = new SetupState(data);
         instance.enter();
 
         // Not ready yet — should stay in this state
@@ -92,12 +87,10 @@ public class SetupStateTest {
         assertNull(result);
 
         // After update() — should transition to DrawCardState
+        provideInput("\n"); // simulates pressing the enter key
         instance.update();
         GameState next = instance.nextState();
         assertNotNull(next);
         assertTrue(next instanceof DrawCardState);
     }
-
- 
-    
 }

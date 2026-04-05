@@ -46,7 +46,7 @@ public class HandTest {
         Hand instance = new Hand(5);
         instance.setup();
         int sizeBefore = instance.getCards().size();
-        Card result = instance.draw();
+        Card result = instance.drawRandom();
         assertNotNull(result);
         assertEquals(sizeBefore - 1, instance.getCards().size());
         

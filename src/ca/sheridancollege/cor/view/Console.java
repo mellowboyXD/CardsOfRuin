@@ -4,8 +4,15 @@ import ca.sheridancollege.cor.controller.GameController;
 
 import java.util.List;
 
-public class Console {
-    private static final long SLEEP_TIME_MS = 1000; // 1 second
+public class Console implements Sleeper {
+    public static final long SLEEP_TIME_MS = 1000; // 1 second
+
+    // using singleton pattern to have only one active instance of this class
+    private static Console instance = new Console();
+
+    protected static void setInstance(Console console) {
+        instance = console;
+    }
 
     /**
      * Prints a decorative label without sleeping.
@@ -30,7 +37,7 @@ public class Console {
      */
     public static void print(String message) {
         System.out.print(message);
-        sleep();
+        doSleep();
     }
 
     /**
@@ -51,7 +58,7 @@ public class Console {
         for (int i = 0; i < options.size(); i++) {
             System.out.printf("%d - %s%n", i + 1, options.get(i));
         }
-        sleep();
+        doSleep();
     }
 
     /**
@@ -61,15 +68,28 @@ public class Console {
      */
     public static void println(String message) {
         System.out.println(message);
-        sleep();
+        doSleep();
     }
 
     /**
      * Puts the current thread to sleep for SLEEP_TIME_MS milliseconds.
      */
-    private static void sleep() {
+    protected static void doSleep() {
+        instance.sleep(Console.SLEEP_TIME_MS);
+    }
+
+    /**
+     * Prints a message without sleeping
+     * @param message - the message to display
+     */
+    public static void printAwake(String message) {
+        System.out.print(message);
+    }
+
+    @Override
+    public void sleep(long ms) {
         try {
-            Thread.sleep(Console.SLEEP_TIME_MS);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             System.out.println("Thread sleep was interrupted");
         }
