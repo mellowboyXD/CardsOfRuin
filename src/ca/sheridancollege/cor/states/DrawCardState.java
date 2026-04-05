@@ -100,7 +100,6 @@ public class DrawCardState implements GameState {
         selectedCard.apply(data.getPlayer(), data.getMonster());
         Console.println("Player: " + data.getPlayer());
 
-        InputController.pressEnterToContinue(scanner);
         ready = true;
     }
 
@@ -111,6 +110,7 @@ public class DrawCardState implements GameState {
      */
     @Override
     public void end() {
+        InputController.pressEnterToContinue(scanner);
         Console.printLabelAwake("COMBAT PHASE");
     }
 
