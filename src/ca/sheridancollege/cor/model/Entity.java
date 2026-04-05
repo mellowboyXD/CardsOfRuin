@@ -15,18 +15,24 @@ public abstract class Entity {
     private int attack;
 
     public void setHealth(int health) {
-        if (health < 0) this.health = 0;
-        if (health >= 0 && health <= MAX_HEALTH) this.health = health;
+        if (health < 0)
+            this.health = 0;
+        else
+            this.health = Math.min(health, MAX_HEALTH);
     }
 
     public void setShield(int shield) {
-        if (shield < 0) this.shield = 0;
-        if (shield >= 0 && shield <= MAX_SHIELD) this.shield = shield;
+        if (shield < 0)
+            this.shield = 0;
+        else
+            this.shield = Math.min(shield, MAX_SHIELD);
     }
 
     public void setAttack(int attack) {
-        if (attack < 0) this.attack = 0;
-        if (attack >= 0 && attack <= MAX_ATTACK) this.attack = attack;
+        if (attack < 0)
+            this.attack = 0;
+        else
+            this.attack = Math.min(attack, MAX_ATTACK);
     }
 
     public int getHealth() {
@@ -57,6 +63,6 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-            return "health: %d - attack: %d - shield: %d".formatted(getHealth(), getAttack(), getShield());
+        return "health: %d - attack: %d - shield: %d".formatted(getHealth(), getAttack(), getShield());
     }
 }
