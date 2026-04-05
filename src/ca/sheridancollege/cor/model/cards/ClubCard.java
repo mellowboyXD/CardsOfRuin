@@ -32,4 +32,9 @@ public class ClubCard extends Card {
             Console.println("Your shield is already at max value!");
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Shield)";
+    }
 }

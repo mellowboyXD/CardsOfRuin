@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import ca.sheridancollege.cor.controller.InputController;
 import ca.sheridancollege.cor.model.GameData;
 import ca.sheridancollege.cor.model.Hand;
-import ca.sheridancollege.cor.model.Monster;
 import ca.sheridancollege.cor.view.Console;
 
 /**
@@ -45,15 +44,14 @@ public class SetupState implements GameState {
 
         var currentMonster = data.getMonster();
         if (currentMonster == null) {
-            // TODO: use builder design pattern to create monster
-            currentMonster = new Monster();
-            currentMonster.setup();
+            var currentRound = data.getRound();
+            currentMonster = data.entityRoundController().createMonster(currentRound);
             data.setMonster(currentMonster);
         } else {
             // decrease shield after each round
             if (currentMonster.getShield() > 0) {
                 int shield = currentMonster.getShield();
-                float modifier = 0.90f;
+                float modifier = 0.80f;
                 currentMonster.setShield(Math.round(shield * modifier));
             }
         }
@@ -77,11 +75,9 @@ public class SetupState implements GameState {
 
     @Override
     public GameState nextState() {
-        if (ready)
-            return new DrawCardState(data);
+        if (ready) return new DrawCardState(data);
 
         // stay in this state
         return null;
     }
-
 }

@@ -167,6 +167,6 @@ public class MenuState implements GameState {
     }
 
     private void quitGame() {
-        Console.exit(data.getController());
+        Console.exit(data.getGameController());
     }
 }
