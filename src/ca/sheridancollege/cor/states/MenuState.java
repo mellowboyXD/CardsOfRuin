@@ -163,9 +163,32 @@ public class MenuState implements GameState {
     }
 
     private void showGameRules() {
-        Console.printLabelAwake("GAME RULES");
-    }
-
+    Console.printLabelAwake("GAME RULES");
+    Console.printLabelAwake("The Goal of the Game is to defeat the monster before your health reaches 0.");
+    Console.printLabelAwake("");
+    Console.printLabelAwake("=== CARD TYPES ===");
+    Console.printLabelAwake("HEART: Boosts your Health by card value");
+    Console.printLabelAwake("DIAMOND: Boosts your attributes BUT also boosts the monster's attributes");
+    Console.printLabelAwake("CLUB: Boosts your Shield by card value");
+    Console.printLabelAwake("SPADE: Boosts your Attack by card value");
+    Console.printLabelAwake("");
+    Console.printLabelAwake("=== COMBAT RULES ===");
+    Console.printLabelAwake("• Each round: Draw a card, then play a card");
+    Console.printLabelAwake("• Player attacks FIRST in combat");
+    Console.printLabelAwake("• Damage calculation: Damage = Opponent Attack - Your Shield");
+    Console.printLabelAwake("• If Shield is 0, damage is taken from Health");
+    Console.printLabelAwake("• Monsters get STRONGER each round");
+    Console.printLabelAwake("");
+    Console.printLabelAwake("=== GAME FLOW ===");
+    Console.printLabelAwake("1. Draw Phase - Draw a card from your deck");
+    Console.printLabelAwake("2. Apply Phase - Choose a card to play");
+    Console.printLabelAwake("3. Combat Phase - Fight the monster (you attack first)");
+    Console.printLabelAwake("4. Reward Phase - Collect rewards after victory");
+    Console.printLabelAwake("");
+    Console.printLabelAwake("=== GAME ENDING ===");
+    Console.printLabelAwake("• You LOSE if your Health reaches 0");
+    Console.printLabelAwake("• You can choose to continue or exit after defeating a monster");
+}
     private void quitGame() {
         Console.exit(data.getGameController());
     }

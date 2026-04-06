@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/Cards/src/ca/sheridancollege/cor/model/GameData.java</file>
-            <file>file:/Applications/Cards/test/ca/sheridancollege/cor/model/GameDataTest.java</file>
+            <file>file:/Users/hassenibrahim/CardsOfRuin/test/ca/sheridancollege/cor/controller/GameControllerTest.java</file>
+            <file>file:/Users/hassenibrahim/CardsOfRuin/src/ca/sheridancollege/cor/states/MenuState.java</file>
+            <file>file:/Users/hassenibrahim/CardsOfRuin/src/ca/sheridancollege/cor/controller/GameController.java</file>
         </group>
     </open-files>
 </project-private>
