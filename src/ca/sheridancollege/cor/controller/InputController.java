@@ -29,6 +29,7 @@ public class InputController {
                 return num;
             } catch (InputMismatchException ex) {
                 System.out.print("Invalid input. Please enter numbers only. > ");
+                scanner.nextLine(); // reset scanner so that it can accept new input
             } catch (NoSuchElementException ex) {
                 throw new NoSuchElementException("No more input");
             }
