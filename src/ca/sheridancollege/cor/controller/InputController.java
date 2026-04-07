@@ -1,5 +1,7 @@
 package ca.sheridancollege.cor.controller;
 
+import ca.sheridancollege.cor.view.Console;
+
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -11,7 +13,7 @@ import java.util.Scanner;
  */
 public class InputController {
     public static void pressEnterToContinue(Scanner scanner, String message) {
-        System.out.print(message);
+        Console.printAwake(message);
         scanner.nextLine();
     }
 
@@ -28,14 +30,11 @@ public class InputController {
                 scanner.nextLine();
                 return num;
             } catch (InputMismatchException ex) {
-                System.out.print("Invalid input. Please enter numbers only. > ");
+                Console.printAwake("Invalid input. Please enter numbers only. > ");
+                scanner.nextLine(); // reset scanner so that it can accept new input
             } catch (NoSuchElementException ex) {
                 throw new NoSuchElementException("No more input");
             }
         }
-    }
-
-    public static void clear(Scanner scanner) {
-        scanner.nextLine();
     }
 }
