@@ -32,6 +32,7 @@ public class GameController {
 
 	public void run() {
 		Console.printTitleAwake(title.toUpperCase());
+		Console.printlnAwake("     by Banjo-Kazoowi (Group 7)");
 		setup();
 		while (context.isGameRunning()) {
 			try {
